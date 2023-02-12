@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .icon {
+    @apply hidden xl:inline-flex p-2 h-10 w-10 bg-gray-200 rounded-full text-gray-700 cursor-pointer hover:bg-gray-300;
+  }
+
+  .inputIcon {
+    @apply flex items-center space-x-1 rounded-xl hover:bg-gray-200 p-2 flex-grow justify-center cursor-pointer;
+  }
+
+  .plainIcon {
+    @apply p-2 rounded-full cursor-pointer hover:bg-gray-300 transition duration-150 transform ease-in;
+  }
+}
