@@ -26,9 +26,11 @@ function MessageList({ initialMessages }) {
 
   return (
     <div className="space-y-5 px-5 mb-32 pt-8 max-w-2xl xl:max-w-4xl mx-auto">
-      {(messages || initialMessages)?.map((message) => (
-        <MessageComponent key={message.id} message={message} />
-      ))}
+      {messages || initialMessages
+        ? (messages || initialMessages)?.map((message) => (
+            <MessageComponent key={message.id} message={message} />
+          ))
+        : []}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 function Loading() {
   return (
-    <div class="text-center pt-32">
+    <div className="text-center pt-32">
       <p className="text-blue-400 pb-5 animate-pulse">Loading messenger</p>
       <div role="status">
         <svg

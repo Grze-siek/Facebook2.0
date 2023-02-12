@@ -5,7 +5,7 @@ import { useRef, useCallback, useState } from 'react';
 import Webcam from 'react-webcam';
 
 const videoConstraints = {
-  width: 640,
+  width: 675,
   height: 480,
   facingMode: 'user',
 };
@@ -42,7 +42,7 @@ function WebcamCapture({ setImage, display }) {
           <img src={imgSrc} alt="img" />
           <div
             onClick={retakePic}
-            className="bg-gray-500 top-2 left-2 text-white hover:scale-105 p-2 opacity-75 rounded-full cursor-pointer absolute"
+            className="bg-gray-500 top-5 left-5 text-white hover:scale-105 p-2 opacity-75 rounded-full cursor-pointer absolute"
           >
             <RefreshIcon className="h-8" />
           </div>
@@ -55,15 +55,16 @@ function WebcamCapture({ setImage, display }) {
           screenshotFormat="image/jpeg"
           width={videoConstraints.width}
           videoConstraints={videoConstraints}
+          objectFit="cover"
         />
       )}
       <div className="bottom-5 text-white absolute z-50">
         {imgSrc ? (
-          <div>
+          <div className="flex flex-col justify-center">
             <button onClick={saveImage}>
               <EyeIcon className="h-12 text-green-500" />
             </button>
-            <p>Opublikuj</p>
+            <p className="text-center">Post</p>
           </div>
         ) : (
           <button onClick={capturePic}>

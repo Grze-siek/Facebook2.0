@@ -10,8 +10,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { db } from '../firebase';
-import firebase from 'firebase';
-import { remove, ref } from 'firebase/database';
+import { toast, Toaster } from 'react-hot-toast';
 
 function Post({ id, name, message, email, postImage, image, timestamp }) {
   const [post, setPost] = useState(true);
@@ -27,8 +26,12 @@ function Post({ id, name, message, email, postImage, image, timestamp }) {
 
   const deletePost = (e) => {
     e.preventDefault();
-    // remove(ref(db, `posts/` + firebase.storage.))
-    db.collection('posts').doc(id).delete();
+    try {
+      db.collection('posts').doc(id).delete();
+      toast.success('Post Deleted');
+    } catch (e) {
+      toast.error('Failed to delete post');
+    }
   };
 
   return (
@@ -46,9 +49,14 @@ function Post({ id, name, message, email, postImage, image, timestamp }) {
                 />
                 <div>
                   <p className="font-medium">{name}</p>
-                  <p className="text-xs text-gray-400">
-                    {new Date(timestamp?.toDate()).toLocaleString()}
-                  </p>
+
+                  {timestamp ? (
+                    <p className="text-xs text-gray-400">
+                      {new Date(timestamp?.toDate()).toLocaleString()}
+                    </p>
+                  ) : (
+                    <p className="text-xs text-gray-400">Loading...</p>
+                  )}
                 </div>
               </div>
               <div className="flex items-center space-x-1">
@@ -63,6 +71,7 @@ function Post({ id, name, message, email, postImage, image, timestamp }) {
                 >
                   <XIcon className="h-6" />
                 </div>
+                <Toaster toastOptions={{ position: 'bottom-center' }} />
               </div>
             </div>
 
@@ -96,13 +105,13 @@ function Post({ id, name, message, email, postImage, image, timestamp }) {
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
               <XCircleIcon className="h-6 text-gray-500" />
-              <p className="font-medium">Post został ukryty</p>
+              <p className="font-medium">Post has been hidden</p>
             </div>
             <div
               onClick={undoRemoval}
               className="flex items-center space-x-2 p-2 bg-gray-200 hover:bg-gray-300 rounded-md cursor-pointer"
             >
-              <p className="font-medium">Cofnij</p>
+              <p className="font-medium">Undo</p>
             </div>
           </div>
         </div>

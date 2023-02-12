@@ -14,11 +14,13 @@ function CameraScreen({ display, setImage }) {
   return (
     <>
       {show && (
-        <div className={`relative bg-white rounded-2xl p-4 shadow-md mt-6`}>
+        <div
+          className={`relative bg-white rounded-2xl shadow-md mt-6 overflow-hidden`}
+        >
           <WebcamCapture setImage={setImage} display={display} />
           <div
             onClick={closeWindow}
-            className="absolute flex right-6 top-6 justify-end items-center z-50 p-2 rounded-full cursor-pointer bg-gray-500 opacity-75 hover:scale-105 text-white"
+            className="absolute flex right-5 top-5 justify-end items-center z-50 p-2 rounded-full cursor-pointer bg-gray-500 opacity-75 hover:scale-105 text-white"
           >
             <XIcon className="h-8" />
           </div>
