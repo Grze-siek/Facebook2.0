@@ -11,7 +11,6 @@ function MessageList({ initialMessages }) {
     const channel = clientPusher.subscribe('messages');
 
     channel.bind('new-message', async (data) => {
-      // if (messages?.find((message) => message.id === data.id)) return;
       if (!messages) {
         mutate(fetcher);
       } else {

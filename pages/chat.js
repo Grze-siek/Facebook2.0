@@ -15,9 +15,7 @@ function chat({ session }) {
   }
 
   async function fetchData() {
-    const data = await fetch(
-      `${process.env.VERCEL_URL || 'http://localhost:3000'}/api/getMessages`
-    )
+    const data = await fetch(`${process.env.VERCEL_URL}/api/getMessages`)
       .then((res) => res.json())
       .then((data) => {
         setMessages((messages = [...data.messages]));
