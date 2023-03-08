@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         messagesArr.push({ ...doc.data() });
       });
 
-      const messages = messagesArr.sort((a, b) => b.created_at - a.created_at);
+      const messages = messagesArr.sort((a, b) => a.created_at - b.created_at);
       res.status(200).json({ messages });
     });
 }
