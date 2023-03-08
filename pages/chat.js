@@ -15,7 +15,11 @@ function chat({ session }) {
   }
 
   async function fetchData() {
-    const data = await fetch(`${process.env.VERCEL_URL}/api/getMessages`)
+    const data = await fetch(
+      `${
+        process.env.VERCEL_URL || 'https://facebook2-0-zeta.vercel.app/'
+      }/api/getMessages`
+    )
       .then((res) => res.json())
       .then((data) => {
         setMessages((messages = [...data.messages]));
